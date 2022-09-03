@@ -20,6 +20,7 @@ from projeto.encurtador import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.home, name='home'),
     path('<slug:slug>', views.redirecionar),
-    path('relatorios/<slug:slug>', views.relatorios),
+    path('relatorios/<slug:slug>', views.relatorios, name='relatorios'),
 ]
