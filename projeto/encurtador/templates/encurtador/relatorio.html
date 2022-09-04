@@ -7,8 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="generator" content="">
-    <title>URL Reduce</title>
-   
+    <title>URL Reduce | Relatório</title>
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
     <!-- Bootstrap core CSS -->
@@ -19,34 +18,37 @@
     <div class="container">
       <div class="row">
         <div class="offset-sm-1 col-sm-10">
-          <h1 class="font-weight-bold">URL<span class="font-weight-light color-y">Reduce</span></h1>
+          <a href="{% url 'home' %}">
+            <h1 class="font-weight-bold">URL<span class="font-weight-light color-y">Reduce</span></h1>
+          </a>
           <p class="h5 mb-5 text-muted">Encurtador de URL</p>
-
         </div>
       </div>
 
       <div class="row">
         <div class="offset-sm-1 col-sm-10 text-left text-muted">
-          <p>Criado em {% now "d \d\e F \d\e Y, \à\s H:i\H" %} |</p>
-          <h5>Original: <a href="{{reduce.destino}}" class="color-y">{{reduce.destino}}</a></h5>
+          <p>Atualizado em {% now "d \d\e F \d\e Y, \à\s H:i" %}</p>
+          <h5>URL original: <a href="{{reduce.destino}}" class="color-y" target="_blank">{{reduce.destino}}</a></h5>
         </div>
       </div>
+      <br>
+      <br>
 
       <div class="row">
-        <div class="offset-sm-1 col-sm-10 text-left text-muted">
-          <h3>Reduzido: <a href="{{url_reduzida}}" class="color-y">{{url_reduzida}}</a></h3>
+        <div class="offset-sm-1 col-sm-10 text-center text-muted">
+          <br>
+          <h4>
+            URL reduzido:
+            <a href="{{url_reduzida}}" target="_blank"><input readonly type="text" id="texto" value="{{url_reduzida}}"
+              style="font-size: 20px; border-radius: 10px; border: none; padding: 5px; width: 280px; cursor: pointer;"/></a>
+            <button class="btn btn-outline-primary" onclick="copiarTexto()">Copiar</button>
+          </h4>
         </div>
       </div>
+      <br>
 
-      <div class="row">
-        <div class="offset-sm-1 col-sm-10 text-left">
-          <button class="btn btn-outline-primary">COPY</button>
-          <button class="btn btn-outline-primary">SHARE</button>
-        </div>
-      </div>
-
-      <h2 class="font-weight-bold mt-5">Total de Cliques: <span class="color-y">{{ total_de_cliques }}</span></h2>
-      <p class="text-muted">Gráfico de Cliques por Dia</p> 
+      <h2 class="font-weight-bold mt-5">Total de Acessos: <span class="color-y">{{ total_de_cliques }}</span></h2>
+      <p class="text-muted">Gráfico de Acessos por Dia</p> 
       <div class="row mt-3">
         <div class="offset-sm-1 col-sm-10">
 
@@ -65,7 +67,7 @@
             <!-- Tabela -->
             <div class="panel">
                 <div class="panel-heading">
-                    <h3 class="panel-title font-weight-bold mb-3">Cliques por Dia</h3>
+                    <h3 class="panel-title font-weight-bold mb-3">Acessos por Dia</h3>
                 </div>
                     <div class="panel-body">
                         <div class="table-responsive">
@@ -73,12 +75,12 @@
                                 <thead>
                                     <tr>
                                         <th class="text-left">Data</th>
-                                        <th>Total de Cliques</th>
+                                        <th>Total de Acessos</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 {% for r in redirecionamentos_por_data %}
-                                    <tr title="QTD de Cliques em {{r.data}}">
+                                    <tr title="QTD de Acessos em {{r.data}}">
                                         <td class="text-left">{{r.data}}</td>
                                         <td>{{r.cliques}}</td>
                                     </tr>
@@ -93,7 +95,7 @@
         </div>
     </div>
 
-      <p class="mt-5 text-muted"><span class="color-y">&copy;</span> 2021 | URL<span class="color-y">Reduce</span></p>
+      <p class="mt-5 text-muted"><span class="color-y">&copy;</span> {% now "Y" %} | URL<span class="color-y">Reduce</span></p>
       <br />
     </div>
     
@@ -126,7 +128,7 @@
                 {% endfor %}
                 ],
               datasets: [{
-                  label: "Total de Cliques por Dia",
+                  label: "Total de Acessos por Dia",
                   backgroundColor: '#005490',
                   borderColor: '#005490',
                   data: [
@@ -148,7 +150,7 @@
               },
               title: {
                   display: true,
-                  //text: 'Gráfico de Cliques por Dia'
+                  //text: 'Gráfico de Acessos por Dia'
               },
               tooltips: {
                   mode: 'index',
@@ -167,5 +169,16 @@
       });
     </script>
     <!-- Gráfico -->
+
+    <!-- Botão para copiar o link -->
+    <script>
+      function copiarTexto() {
+        let textoCopiado = document.getElementById("texto");
+        textoCopiado.select();
+        textoCopiado.setSelectionRange(0, 99999)
+        document.execCommand("copy");
+      }
+    </script>
+    <!-- Botão para copiar o link -->
   </body>
 </html>
