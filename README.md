@@ -46,10 +46,10 @@ Antes de começar, você precisa ter o [Python](https://www.python.org/downloads
 
 ```bash
 # Clone este repositório
-$ git clone https://github.com/Raphael120/encurtador_de_url
+$ git clone https://github.com/Raphael120/URLReduce
 
 # Entre na pasta
-$ cd encurtador_de_url
+$ cd URLReduce
 ```
 
 2° - Crie e ative um ambiente virtual:
